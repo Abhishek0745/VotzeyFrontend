@@ -1,0 +1,244 @@
+/* ==============================
+   General Body & Fonts + BG
+============================== */
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: #eaeaf0;
+    overflow-x: hidden;
+
+    /* Unified Modern Background for all pages */
+    background: radial-gradient(circle at top left, rgba(70,90,150,0.3), transparent 45%),
+                radial-gradient(circle at bottom right, rgba(90,60,120,0.3), transparent 45%),
+                linear-gradient(135deg, #0b0f1a, #0b0f1a);
+}
+
+/* ------------------------------
+   Backgrounds per page
+------------------------------ */
+body.home {
+    background: radial-gradient(circle at top left, rgba(70,90,150,0.25), transparent 45%),
+                radial-gradient(circle at bottom right, rgba(90,60,120,0.25), transparent 45%),
+                #0b0f1a;
+}
+body.voter-page {
+    background: radial-gradient(circle at top left, rgba(70,90,150,0.35), transparent 45%),
+                radial-gradient(circle at bottom right, rgba(90,60,120,0.35), transparent 45%),
+                #0b0f1a;
+}
+body.vote-page {
+    background: linear-gradient(135deg, #0b1320, #0f1f2e, #162b3a);
+    color: #cfe8ff;
+}
+body.results-page {
+    background: radial-gradient(circle at top left, rgba(70,90,150,0.25), transparent 45%),
+                radial-gradient(circle at bottom right, rgba(90,60,120,0.25), transparent 45%),
+                #0b0f1a;
+}
+
+/* ------------------------------
+   Navbar
+------------------------------ */
+.navbar {
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+}
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+.btn-modern {
+    background: linear-gradient(135deg, #5b6cff, #7a5cff);
+    border: none;
+    border-radius: 40px;
+    padding: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+.btn-modern:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(90,120,255,0.6);
+}
+
+.btn-vote {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    border: none;
+    border-radius: 40px;
+    padding: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+.btn-vote:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0,120,255,0.6);
+}
+
+/* ------------------------------
+   Forms
+------------------------------ */
+.form-control, .form-select {
+    border-radius: 14px;
+    padding: 12px 14px;
+    border: 1px solid rgba(120,180,255,0.25);
+    background: rgba(20,35,55,0.9); /* White -> Dark modern color */
+    color: #eaf6ff; /* Input text color */
+}
+.form-control::placeholder {
+    color: #9fbcd3;
+}
+
+/* ------------------------------
+   Glass Cards / Hero / Feature Cards
+------------------------------ */
+.glass, .hero, .feature-card, .vote-card, .table-container {
+    background: rgba(20,35,55,0.9); /* White -> Darker */
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    color: #eaeaf0;
+    padding: 2rem;
+    animation: fadeUp 0.9s ease;
+}
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Voting card specific animation */
+.vote-card {
+    border: 1px solid rgba(120,180,255,0.25);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.9s ease;
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------
+   Titles
+------------------------------ */
+.title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #9aa8ff, #c6a7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.vote-page .title {
+    font-size: 2.3rem;
+    background: linear-gradient(90deg, #6dd5fa, #ffffff);
+}
+.results-page .title {
+    font-size: 2.2rem;
+    background: linear-gradient(90deg, #ff6b6b, #ffbaba);
+}
+
+/* ------------------------------
+   Hero Section
+------------------------------ */
+.hero {
+    border-radius: 24px;
+    padding: 60px 40px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+    color: #fff;
+}
+.hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #9aa8ff, #c6a7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #cfe8ff;
+}
+
+/* ------------------------------
+   Feature Cards
+------------------------------ */
+.feature-card {
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+    padding: 30px 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.icon-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5b6cff, #7a5cff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 30px;
+    margin: 0 auto 20px auto;
+}
+
+/* ------------------------------
+   Tables
+------------------------------ */
+.table {
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(20,25,45,0.85); /* Dark background */
+    color: #eaeaf0;
+}
+.table thead {
+    background: linear-gradient(135deg, #3a4f7a, #5a3f6e);
+}
+.table thead th {
+    color: #fff;
+    border: none;
+}
+.table tbody tr:hover {
+    background: rgba(255,255,255,0.08);
+}
+.table td {
+    border-color: rgba(255,255,255,0.08);
+}
+
+/* ------------------------------
+   Background floating blobs (Voter page)
+------------------------------ */
+.blob {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    background: linear-gradient(135deg, #3a4f7a, #5a3f6e);
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.35;
+    animation: float 10s infinite alternate ease-in-out;
+}
+.blob.one { top: -100px; left: -100px; }
+.blob.two { bottom: -120px; right: -120px; animation-delay: 2s; }
+@keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-40px); }
+}
+
+/* ------------------------------
+   Responsive
+------------------------------ */
+@media (max-width: 768px) {
+    .glass { padding: 1.5rem; }
+    .title { font-size: 1.8rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    .vote-card { padding: 1.5rem; }
+}
