@@ -1,83 +1,282 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Candidate Management • Modern UI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votezy • Candidate Management</title>
 
-  <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Central CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 </head>
+
 <body>
 
+<!-- Floating Background -->
+
+<div class="blob one"></div>
+<div class="blob two"></div>
+
 <!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">🗳️ Online Voting</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
+
+
+<div class="container">
+
+    <a class="navbar-brand fw-bold" href="index.html">
+        🗳️ Votezy
+    </a>
+
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+
+        <span class="navbar-toggler-icon"></span>
+
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link text-white" href="voters.html">Voters</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="candidates.html">Candidates</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="voting.html">Voting</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="results.html">Results</a></li>
-      </ul>
+
+        <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="voters.html">Voters</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="candidates.html">Candidates</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="voting.html">Voting</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="results.html">Results</a>
+            </li>
+            <li class="nav-item" id="adminNav"></li>
+
+            <li class="nav-item ms-3" id="navUserArea"></li>
+
+        </ul>
+
     </div>
-  </div>
+
+</div>
+
+
 </nav>
 
-<!-- Candidate Registration -->
-<div class="container mt-5">
-  <h2 class="text-center title mb-4">Candidate Registration</h2>
+<!-- Hero -->
 
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="glass">
-        <form id="candidateForm">
-          <div class="mb-4">
-            <label class="form-label">Candidate Name</label>
-            <input type="text" id="candidateName" class="form-control" placeholder="Candidate full name" required>
-          </div>
-          <div class="mb-4">
-            <label class="form-label">Party</label>
-            <input type="text" id="party" class="form-control" placeholder="Political party" required>
-          </div>
-          <button type="submit" class="btn btn-modern w-100">Register Candidate</button>
-        </form>
-      </div>
+<section class="container mt-5">
+
+<div class="hero glass text-center">
+
+    <div class="hero-badge">
+        Election Management
     </div>
-  </div>
+
+    <h1 class="hero-title">
+        Candidate Dashboard
+    </h1>
+
+    <p class="hero-sub">
+        Register, manage and monitor election candidates
+        with real-time voting insights.
+    </p>
+
 </div>
 
-<!-- Candidate List -->
-<div class="container mt-5 mb-5">
-  <h3 class="text-center title mb-3">Registered Candidates</h3>
-  <div class="glass p-4">
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Party</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="candidatesContainer"></tbody>
-      </table>
+
+</section>
+
+<!-- Stats -->
+
+<section class="container mt-5">
+
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+
+        <div class="glass stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+
+            <div class="stat-number" id="candidateCount">
+                --
+            </div>
+
+            <div class="stat-label">
+                Total Candidates
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
+    <div class="col-md-4">
+
+        <div class="glass stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-bar-chart-fill"></i>
+            </div>
+
+            <div class="stat-number" id="voteCount">
+                --
+            </div>
+
+            <div class="stat-label">
+                Total Votes
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="glass stat-card">
+
+            <div class="stat-icon">
+                <i class="bi bi-trophy-fill"></i>
+            </div>
+
+            <div class="stat-number" id="leadingParty">
+                --
+            </div>
+
+            <div class="stat-label">
+                Leading Party
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+</section>
+
+<!-- Add Candidate -->
+
+<section class="container mt-5" id="adminSection">
+
+
+<div class="glass p-4">
+
+    <div class="section-header">
+
+        <h3>
+            <i class="bi bi-person-plus-fill"></i>
+            Register Candidate
+        </h3>
+
+    </div>
+
+    <form id="candidateForm">
+
+        <div class="row g-3">
+
+            <div class="col-lg-5">
+
+                <input
+                        type="text"
+                        id="candidateName"
+                        class="form-control"
+                        placeholder="Candidate Full Name"
+                        required>
+
+            </div>
+
+            <div class="col-lg-5">
+
+                <input
+                        type="text"
+                        id="party"
+                        class="form-control"
+                        placeholder="Political Party"
+                        required>
+
+            </div>
+
+            <div class="col-lg-2">
+
+                <button
+                        type="submit"
+                        class="btn btn-modern w-100">
+
+                    Add Candidate
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</section>
+
+<!-- Candidate Cards -->
+
+<section class="container mt-5 mb-5">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2 class="title mb-1">
+            Election Candidates
+        </h2>
+
+        <p style="color:var(--text-secondary)">
+            Real-time candidate performance and standings
+        </p>
+
+    </div>
+
+    <div class="live-pill">
+        ● Live Data
+    </div>
+
+</div>
+
+<!-- JS will inject cards here -->
+<div
+        id="candidatesContainer"
+        class="row g-4">
+
+</div>
+
+
+</section>
+
+<script src="assets/js/auth.js"></script>
 
 <script src="assets/js/main.js"></script>
+
 <script src="assets/js/candidates.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

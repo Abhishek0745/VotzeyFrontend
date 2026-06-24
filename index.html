@@ -1,77 +1,260 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Online Voting System • Modern UI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votezy • Secure Election Platform</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- External Modern CSS -->
   <link rel="stylesheet" href="assets/css/styles.css">
+
+  <style>
+    body{
+      background:#0a0e1a;
+    }
+
+    .hero-section{
+  padding:60px 0 40px;
+}
+
+    .hero-badge{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(99,102,241,.12);
+      color:#818cf8;
+      border:1px solid rgba(99,102,241,.25);
+      margin-bottom:20px;
+      font-size:.85rem;
+      font-weight:600;
+    }
+
+    .stats-box{
+      text-align:center;
+      padding:20px;
+      background:#111827;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:14px;
+      transition:.3s;
+    }
+
+    .stats-box:hover{
+      transform:translateY(-5px);
+      border-color:#6366f1;
+    }
+
+    .stats-number{
+      font-size:2rem;
+      font-weight:700;
+    }
+
+    .stats-label{
+      color:#94a3b8;
+      font-size:.85rem;
+    }
+  </style>
+
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark">
+
   <div class="container">
-    <a class="navbar-brand" href="index.html">🗳️ Online Voting</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="voters.html">Voters</a></li>
-        <li class="nav-item"><a class="nav-link" href="candidates.html">Candidates</a></li>
-        <li class="nav-item"><a class="nav-link" href="voting.html">Voting</a></li>
-        <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
-      </ul>
-    </div>
+
+<a class="navbar-brand" href="#">
+  🗳️ Votezy
+</a>
+
+<button class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navMenu">
+
+  <ul class="navbar-nav ms-auto">
+
+    <li class="nav-item">
+      <a class="nav-link" href="voters.html">Voters</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="candidates.html">Candidates</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="voting.html">Voting</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="results.html">Results</a>
+    </li>
+    <li class="nav-item" id="adminNav"></li>
+
+<li class="nav-item ms-3" id="navUserArea"></li>
+
+  </ul>
+
+</div>
+
   </div>
+
 </nav>
 
-<!-- Hero -->
-<div class="container mt-5 text-center">
-  <div class="hero">
-    <h1>Online Voting System</h1>
-    <p>Secure, fast, and transparent digital voting platform.</p>
-    <a href="voters.html" class="btn btn-modern btn-lg">Register & Vote</a>
-  </div>
+<section class="hero-section">
+
+  <div class="container text-center">
+
+<div class="hero-badge">
+  Secure • Transparent • Real-Time
 </div>
 
-<!-- Feature Cards -->
-<div class="container mt-5">
+<h1 class="hero-title">
+  Next Generation
+  <br>
+  Digital Voting Platform
+</h1>
+
+<p class="hero-sub">
+  Conduct secure elections with real-time results,
+  JWT authentication and modern digital governance.
+</p>
+
+<div class="hero-btns">
+
+  <a href="register.html"
+     class="btn-hero-primary">
+    Get Started
+  </a>
+
+  <a href="results.html"
+     class="btn-hero-outline">
+    View Results
+  </a>
+
+</div>
+
+  </div>
+
+</section>
+
+<div class="container mb-5">
+
   <div class="row g-4">
-    <div class="col-md-4">
-      <div class="feature-card h-100">
-        <div class="icon-box"><i class="bi bi-shield-lock"></i></div>
-        <h5 class="fw-bold">Secure Voting</h5>
-        <p>Your vote is protected with advanced security and encryption.</p>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="feature-card h-100">
-        <div class="icon-box"><i class="bi bi-lightning-charge"></i></div>
-        <h5 class="fw-bold">Fast Process</h5>
-        <p>Vote instantly without long queues or paperwork.</p>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="feature-card h-100">
-        <div class="icon-box"><i class="bi bi-bar-chart"></i></div>
-        <h5 class="fw-bold">Live Results</h5>
-        <p>View real-time results with complete transparency.</p>
-      </div>
-    </div>
+<div class="col-md-3">
+  <div class="stats-box">
+    <div class="stats-number">100%</div>
+    <div class="stats-label">Secure Voting</div>
   </div>
 </div>
 
-<!-- Bootstrap JS -->
+<div class="col-md-3">
+  <div class="stats-box">
+    <div class="stats-number">24/7</div>
+    <div class="stats-label">Availability</div>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="stats-box">
+    <div class="stats-number">JWT</div>
+    <div class="stats-label">Authentication</div>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="stats-box">
+    <div class="stats-number">Live</div>
+    <div class="stats-label">Results</div>
+  </div>
+</div>
+
+
+  </div>
+
+</div>
+
+<div class="container mb-5">
+
+  <div class="row g-4">
+
+<div class="col-md-4">
+
+  <div class="feature-card">
+
+    <div class="feature-icon">
+      <i class="bi bi-shield-lock"></i>
+    </div>
+
+    <div class="feature-title">
+      Secure Voting
+    </div>
+
+    <div class="feature-desc">
+      JWT authentication and secure vote management.
+    </div>
+
+  </div>
+
+</div>
+
+<div class="col-md-4">
+
+  <div class="feature-card">
+
+    <div class="feature-icon">
+      <i class="bi bi-lightning-charge"></i>
+    </div>
+
+    <div class="feature-title">
+      Fast Election Process
+    </div>
+
+    <div class="feature-desc">
+      Instant voting experience without delays.
+    </div>
+
+  </div>
+
+</div>
+
+<div class="col-md-4">
+
+  <div class="feature-card">
+
+    <div class="feature-icon">
+      <i class="bi bi-bar-chart"></i>
+    </div>
+
+    <div class="feature-title">
+      Real-Time Results
+    </div>
+
+    <div class="feature-desc">
+      Live election analytics and transparency.
+    </div>
+
+  </div>
+
+</div>
+
+  </div>
+
+</div>
+
+<script src="assets/js/auth.js"></script>
+
+<script src="assets/js/main.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

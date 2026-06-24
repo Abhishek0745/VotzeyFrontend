@@ -1,75 +1,90 @@
-document.addEventListener("DOMContentLoaded", () => {
-	loadVoters();
+// ✅ MODIFIED FILE: Voter list now ADMIN only. Registration moved to login.html
+document.addEventListener('DOMContentLoaded', () => {
+  const user = getUser();
+  if (!user || user.role !== 'ADMIN') {
+    document.getElementById('votersSection').innerHTML = `
+      <div class="card-glass text-center py-5">
+        <i class="bi bi-shield-lock" style="font-size:2rem;color:var(--text-muted)"></i>
+        <p style="color:var(--text-muted);margin-top:1rem">Admin access required to view voters</p>
+      </div>
+    `;
+    return;
+  }
+  loadVoters();
 });
 
-// Load all voters
 function loadVoters() {
-    fetch("http://localhost:9091/api/voters")
-        .then((res) => res.json())
-        .then((data) => {
-            let votersContainer = document.getElementById("votersContainer");
-            votersContainer.innerHTML = "";
-            data.forEach((voter) => {
-                votersContainer.innerHTML += `
-                    <tr style="background-color: rgba(20,35,55,0.9); color: #d5d5eaff;">
-                        <td>${voter.id}</td>
-                        <td>${voter.name}</td>
-                        <td>${voter.email}</td>
-                        <td><button class="btn btn-danger" onclick="deleteVoter(${voter.id})">Delete</button></td>
-                    </tr>
-                `;
-            });
-        })
-        .catch((error) => {
-            console.log(error);
-            showAlert("Error", "Failed to load voters.", "error");
-        });
+  const container = document.getElementById('votersContainer');
+  container.innerHTML = `<tr><td colspan="5" class="text-center py-4" style="color:var(--text-muted)">Loading...</td></tr>`;
+
+  fetch(`${API}/api/voters`, { headers: authHeaders() })
+    .then(res => {
+      if (res.status === 403) throw new Error('Access denied');
+      return res.json();
+    })
+    .then(data => {
+          
+          
+       document.getElementById('totalVoters').textContent = data.length;
+      document.getElementById('votedCount').textContent = data.filter(v => v.hasVoted).length;
+      document.getElementById('pendingCount').textContent = data.filter(v => !v.hasVoted).length;
+
+
+
+
+
+      if (data.length === 0) {
+        container.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="bi bi-people"></i><p>No voters registered yet</p></div></td></tr>`;
+        return;
+      }
+      container.innerHTML = data.map(voter => `
+        <tr>
+          <td style="font-size:0.8rem;color:var(--text-muted)">#${voter.id}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(99,102,241,0.15);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:var(--accent)">
+                ${voter.name.charAt(0).toUpperCase()}
+              </div>
+              <span style="font-weight:500">${voter.name}</span>
+            </div>
+          </td>
+          <td style="color:var(--text-secondary)">${voter.email}</td>
+          <td>
+            ${voter.hasVoted
+              ? '<span class="badge-voted"><i class="bi bi-check-circle-fill me-1"></i>Voted</span>'
+              : '<span class="badge-pending">Pending</span>'}
+          </td>
+          <td>
+            <button class="btn-danger-sm" onclick="deleteVoter(${voter.id}, '${voter.name}')">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    })
+    .catch(err => {
+      container.innerHTML = `<tr><td colspan="5" class="text-center" style="color:#ef4444">${err.message}</td></tr>`;
+    });
 }
 
-
-// Register voter
-document
-	.getElementById("voterForm")
-	?.addEventListener("submit", function (event) {
-		event.preventDefault();
-		const voterData = {
-			name: document.getElementById("name").value,
-			email: document.getElementById("email").value,
-		};
-
-		fetch("http://localhost:9091/api/voters/register", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(voterData),
-		})
-			.then(() => {
-				showAlert("Success", "Voter registered successfully!", "success");
-				document.getElementById("voterForm").reset();
-				loadVoters();
-			})
-			.catch(() => showAlert("Error", "Voter registration failed.", "error"));
-	});
-
-// Delete voter
-function deleteVoter(id) {
-	Swal.fire({
-		title: "Are you sure?",
-		text: "This voter will be permanently deleted.",
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#d9534f",
-		cancelButtonColor: "#6c757d",
-		confirmButtonText: "Yes, delete it!",
-	}).then((result) => {
-		if (result.isConfirmed) {
-			fetch(`http://localhost:9091/api/voters/delete/${id}`, {
-				method: "DELETE",
-			})
-				.then(() => {
-					showAlert("Deleted!", "Voter has been removed.", "success");
-					loadVoters();
-				})
-				.catch(() => showAlert("Error", "Failed to delete voter.", "error"));
-		}
-	});
+function deleteVoter(id, name) {
+  Swal.fire({
+    title: `Delete ${name}?`,
+    text: 'This will permanently remove the voter and their vote.',
+    icon: 'warning',
+    background: '#111827',
+    color: '#f1f5f9',
+    showCancelButton: true,
+    confirmButtonColor: '#ef4444',
+    confirmButtonText: 'Delete'
+  }).then(result => {
+    if (!result.isConfirmed) return;
+    fetch(`${API}/api/voters/delete/${id}`, {
+      method: 'DELETE',
+      headers: authHeaders()
+    })
+    .then(res => { if (!res.ok) throw new Error(); })
+    .then(() => { showToast('Voter deleted', 'success'); loadVoters(); })
+    .catch(() => showToast('Failed to delete voter', 'error'));
+  });
 }
