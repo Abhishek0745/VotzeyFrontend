@@ -1,6 +1,6 @@
 // ✅ AUTH.JS COMPLETE
 
-window.API = 'http://localhost:9091';
+window.API = 'https://votezy-backend-ik9s.onrender.com';
 
 // Save token and user info after login
 function saveAuth(data) {
