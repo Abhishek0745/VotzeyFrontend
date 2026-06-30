@@ -139,13 +139,17 @@ function loadVotingStats() {
     .catch(() => {});
 
   // ✅ FIX — separate fetch, totalVotersEl declared INSIDE this block
-  fetch(`${API}/api/voters`, { headers: authHeaders() })
-    .then(res => res.json())
-    .then(voters => {
-      const totalVotersEl = document.getElementById('totalVoters'); // ✅ moved here
-      if (totalVotersEl) totalVotersEl.textContent = voters.length;
-    })
-    .catch(() => {});
+ fetch(`${API}/api/voters/count`, {
+    headers: authHeaders()
+})
+.then(res => res.json())
+.then(data => {
+    const totalVotersEl = document.getElementById("totalVoters");
+    if (totalVotersEl) {
+        totalVotersEl.textContent = data.total;
+    }
+})
+.catch(() => {});
 }
 // Load Vote Records (Admin Only)
 function loadVotes() {
