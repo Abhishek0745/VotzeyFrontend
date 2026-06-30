@@ -1,6 +1,10 @@
 // ✅ MODIFIED FILE: Voter list now ADMIN only. Registration moved to login.html
 document.addEventListener('DOMContentLoaded', () => {
   const user = getUser();
+
+  // ✅ NEW: Stats cards load karo sabke liye (ADMIN aur VOTER dono)
+  loadVoterStats();
+
   if (!user || user.role !== 'ADMIN') {
     document.getElementById('votersSection').innerHTML = `
       <div class="card-glass text-center py-5">
@@ -13,6 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
   loadVoters();
 });
 
+// ✅ NEW: Stats cards (TOTAL VOTERS / VOTED / PENDING) ke liye separate function
+function loadVoterStats() {
+  fetch(`${API}/api/voters/count`, { headers: authHeaders() })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('totalVoters').textContent = data.total;
+      document.getElementById('votedCount').textContent = data.voted;
+      document.getElementById('pendingCount').textContent = data.pending;
+    })
+    .catch(() => {});
+}
+
 function loadVoters() {
   const container = document.getElementById('votersContainer');
   container.innerHTML = `<tr><td colspan="5" class="text-center py-4" style="color:var(--text-muted)">Loading...</td></tr>`;
@@ -23,15 +39,6 @@ function loadVoters() {
       return res.json();
     })
     .then(data => {
-          
-          
-       document.getElementById('totalVoters').textContent = data.length;
-      document.getElementById('votedCount').textContent = data.filter(v => v.hasVoted).length;
-      document.getElementById('pendingCount').textContent = data.filter(v => !v.hasVoted).length;
-
-
-
-
 
       if (data.length === 0) {
         container.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="bi bi-people"></i><p>No voters registered yet</p></div></td></tr>`;
